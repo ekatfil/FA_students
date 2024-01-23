@@ -23,4 +23,6 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", main.index, name="index"),
+    path("table/", main.table, name="table"),
+    path("about/", main.about, name="about"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
