@@ -20,6 +20,7 @@
                 <th>Факультет</th>
                 <th>Направление подготовки</th>
                 <th>Email</th>
+                <th>Действия</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,17 @@
                 <td>{{ table.faculty }}</td>
                 <td>{{ table.direction }}</td>
                 <td>{{ table.email }}</td>
+                <td>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal{{ table.id }}">
+                        Редактировать
+                    </button>
+                    <form method="post" action="{% url 'delete_table' table.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
