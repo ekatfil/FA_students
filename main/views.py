@@ -13,11 +13,11 @@ def index(request):
 
 
 def table(request):
-    table = Table.objects.all()
+    student = Student.objects.all()
 
     content = {
-        "title": "Таблица",
-        "tables": table,
+        "title": "Таблица студентов",
+        "students": student,
     }
 
     return render(request, "main/table.html", content)
@@ -33,16 +33,16 @@ def add_table(request):
         id = request.POST.get('id')
 
         if id:
-            table = Table.objects.get(pk=id)
-            table.name = name
-            table.year = year
-            table.faculty = faculty
-            table.direction = direction
-            table.email = email
-            table.save()
+            student = Student.objects.get(pk=id)
+            student.name = name
+            student.year = year
+            student.faculty = faculty
+            student.direction = direction
+            student.email = email
+            student.save()
         else:
             # Если запись новая, создаем новый объект
-            table = Table.objects.create(
+            student = Student.objects.create(
                 name=name,
                 year=year,
                 faculty=faculty,
@@ -58,7 +58,7 @@ def add_table(request):
 
 
 def edit_table(request, table_id):
-    table = get_object_or_404(Table, id=table_id)
+    table = get_object_or_404(Student, id=table_id)
 
     if request.method == "POST":
         # Обработка данных для редактирования
@@ -82,7 +82,8 @@ def edit_table(request, table_id):
 
 
 def delete_table(request, table_id):
-    table = get_object_or_404(Table, id=table_id)
+    table = get_object_or_404(Student, id=table_id)
+    
 
     if request.method == "POST":
         # Удаление записи
@@ -90,6 +91,18 @@ def delete_table(request, table_id):
         # return JsonResponse({"deleted": "success"}, status=200)
         return redirect('table')
 
+
+def student_detail(request, student_id):
+
+    student = get_object_or_404(Student, id=student_id)
+    tasks = Task.objects.filter(student=student)
+
+    content = {
+        "student": student,
+        "tasks": tasks,
+    }
+
+    return render(request, 'main/student_detail.html', content)
     
 
 

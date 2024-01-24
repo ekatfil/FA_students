@@ -27,5 +27,6 @@ urlpatterns = [
     path('add_table/', main.add_table, name='add_table'),
     path('edit_table/<int:table_id>/', main.edit_table, name='edit_table'),
     path('delete_table/<int:table_id>/', main.delete_table, name='delete_table'),
+    path('student/<int:student_id>/', main.student_detail, name='student_detail'),
     path("about/", main.about, name="about"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

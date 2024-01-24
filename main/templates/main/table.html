@@ -6,7 +6,8 @@
 
 <div class="container">
     <div class="table-wrapper">
-      <h1 class="text-center mb-5">Таблица</h1>
+      <h1 class="text-center mb-5">Таблица студентов</h1>
+      <p class="text-center">Выберите студента, которого хотите оценить, и нажмите на его ФИО.</p>
       
       <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Добавить запись
@@ -18,30 +19,19 @@
                 <th>ФИО</th>
                 <th>Год поступления</th>
                 <th>Факультет</th>
-                <th>Направление подготовки</th>
+                <th>Группа</th>
                 <th>Email</th>
-                <th>Действия</th>
+                {% comment %} <th>Действия</th> {% endcomment %}
             </tr>
         </thead>
         <tbody>
-            {% for table in tables %}
+            {% for student in students %}
             <tr>
-                <td>{{ table.name }}</td>
-                <td>{{ table.year }}</td>
-                <td>{{ table.faculty }}</td>
-                <td>{{ table.direction }}</td>
-                <td>{{ table.email }}</td>
-                <td>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal{{ table.id }}">
-                        Редактировать
-                    </button>
-                    <form method="post" action="{% url 'delete_table' table.id %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">
-                            Удалить
-                        </button>
-                    </form>
-                </td>
+                <td><a href="{% url 'student_detail' student.id %}">{{ student.name }}</a></td>
+                <td>{{ student.year }}</td>
+                <td>{{ student.faculty }}</td>
+                <td>{{ student.direction }}</td>
+                <td>{{ student.email }}</td>
             </tr>
             {% endfor %}
         </tbody>

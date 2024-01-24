@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% load static %}
+	
+{% block content %}
+
+
+<div class="container mt-5 mb-5">
+    <h1 class="mb-2">{{ student.name }}</h1>
+    <div class="mb-5">
+        <p>Год поступления: {{ student.year }}</p>
+        <p>Факультет: {{ student.faculty }}</p>
+        <p>Группа: {{ student.direction }}</p>
+        <p>Email: {{ student.email }}</p>
+    </div>
+    <div class="mb-5">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Наименование задания</th>
+                    <th>Текст</th>
+                    <th>Оценка</th>
+                    {% comment %} <th>Действия</th> {% endcomment %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.text }}</td>
+                    <td>{{ task.grade }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}
+
